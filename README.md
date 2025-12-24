@@ -1,3 +1,4 @@
 # WXT + React
+ 
 
-This template should help get you started developing with React in WXT.
+ browser["sidePanel"].setPanelBehavior({ openPanelOnActionClick: true })

@@ -6,6 +6,24 @@ import './App.css';
 function App() {
   const [count, setCount] = useState(0);
 
+  const openSidebar = async () => {
+    try {
+      console.log('Attempting to open sidebar...');
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      console.log('Current tab:', tab);
+
+      if (tab?.windowId) {
+        console.log('Opening sidebar for window:', tab.windowId);
+        await chrome.sidePanel.open({ windowId: tab.windowId });
+        console.log('Sidebar opened successfully');
+      } else {
+        console.error('No window ID found for current tab');
+      }
+    } catch (error) {
+      console.error('Failed to open sidebar:', error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -21,6 +39,11 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <div style={{ marginTop: '10px' }}>
+          <button onClick={openSidebar}>
+            Open Sidebar
+          </button>
+        </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

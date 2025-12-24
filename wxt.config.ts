@@ -6,13 +6,7 @@ export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: ({ browser, manifestVersion, mode, command }) => {
     return {
-      permissions: ['storage', 'tabs'],
-      content_scripts: [
-        {
-          matches: ['<all_urls>'], // 匹配所有网址
-          js: ['entrypoints/content/index.ts'],
-        },
-      ],
+      permissions: ['storage', 'tabs', 'sidePanel'],
     };
   },
 
